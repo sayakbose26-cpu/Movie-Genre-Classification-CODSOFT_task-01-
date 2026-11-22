@@ -27,13 +27,16 @@ X = df.drop(columns=[
     "Lead_Actor",
     "Num_Awards",
     "Critic_Reviews",
-    "Year", 
-    "Director"
-    
+    "Year",
+    "Director",
+    "Production_Company",
+    "Country"
 ])
 
 y = df["Genre"]
+
 print(X.columns.to_list())
+
 X_train, X_test, y_train, y_test = train_test_split(
     X,
     y,
@@ -81,14 +84,14 @@ model = Pipeline([
 
 model.fit(X_train, y_train)
 
-
 joblib.dump(model, "movie_genre.pk1")
 
 print("Model saved successfully")
+
 y_pred = model.predict(X_test)
+
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred))
 
 print("\nConfusion Matrix:")
 print(confusion_matrix(y_test, y_pred))
-
